@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="JsOSMaui.Pages.SettingsPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:JsOSMaui.Pages"
+             xmlns:context="clr-namespace:JsOSMaui.ViewModels"
+             xmlns:core="clr-namespace:JsOSMaui.Core"
+             xmlns:v="clr-namespace:JsOSMaui.Views"
+             x:DataType="context:SettingsViewModel"
+             core:ViewModelLocator.AutoWireViewModel="True"
+             BackgroundColor="White">
+    <!--<ContentPage.BindingContext>
+        <context:SettingsViewModel/>
+    </ContentPage.BindingContext>-->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="Menu1" Command="{Binding SaveSettings}" Order="Primary" Priority="0" />
+        <ToolbarItem x:Name="Menu2"  Order="Primary" Priority="1" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+		<StackLayout>
+            <Grid VerticalOptions="StartAndExpand" Grid.Row="{OnIdiom Phone=0, Default=1}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <StackLayout>
+                    <FlexLayout>
+                        <Label TextColor="Black" Text="Enabled"/>
+                        <CheckBox IsChecked="{Binding Settings.Enabled, Mode=TwoWay}" VerticalOptions="CenterAndExpand"/>
+                    </FlexLayout>
+                    <FlexLayout>
+                        <Label TextColor="Black" Text="Allow External Ip"/>
+                        <CheckBox IsChecked="{Binding Settings.AllowExternalIps, Mode=TwoWay}" VerticalOptions="CenterAndExpand"/>
+                    </FlexLayout>
+                </StackLayout>
+                <Button Grid.Row="1" Text="Save" Command="{Binding SaveSettings}" CommandParameter="{Binding Settings}" VerticalOptions="CenterAndExpand" WidthRequest="100" Margin="20,0"/>
+            </Grid>
+            <v:NavBarView
+                x:Name="NavBar"
+                Grid.Row="{OnIdiom Phone=1, Default=0}"/>
+        </StackLayout>
+	</ContentPage.Content>
+</ContentPage>

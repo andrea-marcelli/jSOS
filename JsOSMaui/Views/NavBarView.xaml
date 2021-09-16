@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<FlexLayout x:Class="JsOSMaui.Views.NavBarView"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:JsOSMaui.Views"
+             xmlns:context="clr-namespace:JsOSMaui.ViewModels"
+             x:DataType="context:NavBarViewModel"
+             x:Name="NavBar"
+             Direction="{OnIdiom Phone=Row,Default=Column}"
+			 JustifyContent="{OnIdiom Phone=Center, Default=Start}"
+			 BackgroundColor="{OnIdiom Phone=Transparent, Default={StaticResource Background_Mid}}">
+    <FlexLayout.BindingContext>
+        <context:NavBarViewModel/>
+    </FlexLayout.BindingContext>
+    <FlexLayout.Resources>
+        <Style TargetType="ImageButton">
+            <Setter Property="Margin" Value="{OnIdiom Phone='25,5',Default='0,50,0,25'}"/>
+        </Style>
+    </FlexLayout.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <ImageButton
+            Grid.Column="0"
+            Source="{Binding BindingContext.HomeImg, Source={x:Reference NavBar}}"
+            Command="{Binding BindingContext.GoHomeCommand, Source={x:Reference NavBar}}"
+            x:Name="HomeTab">
+        </ImageButton>
+        <ImageButton
+            Grid.Column="1"
+            Source="{Binding BindingContext.AuthImg, Source={x:Reference NavBar}}"
+            Command="{Binding BindingContext.GoToAuthorizationsPageCommand, Source={x:Reference NavBar}}"
+            x:Name="AuthorizationsTab">
+        </ImageButton>
+        <ImageButton
+            Grid.Column="2"
+            Source="{Binding BindingContext.SettingsImg, Source={x:Reference NavBar}}"
+            Command="{Binding BindingContext.GoToSettingsPageCommand, Source={x:Reference NavBar}}"
+            x:Name="SettingsTab">
+        </ImageButton>
+    </Grid>
+</FlexLayout>

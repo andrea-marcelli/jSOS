@@ -1,0 +1,84 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net6.0-windows10.0.19041</TargetFrameworks>
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+		<OutputType>WinExe</OutputType>
+		<TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<RootNamespace>JsOSMaui</RootNamespace>
+
+		<!-- Required - Enable Single Project for WinUI -->
+		<EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
+		<WindowsPackageType>MSIX</WindowsPackageType>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiImage Include="..\JsOSMaui\Resources\appicon.svg" Link="Resources\appicon.svg" ForegroundFile="..\JsOSMaui\Resources\appiconfg.svg" IsAppIcon="true" Color="#512BD4" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="..\JsOSMaui\Resources\appiconfg.svg" Link="Resources\appiconfg.svg" Color="#512BD4" />
+
+		<!-- Images -->
+		<MauiImage Include="..\JsOSMaui\Resources\Images\*" Link="Resources\Images\%(Filename)%(Extension)" />
+
+		<!-- Custom Fonts -->
+		<MauiFont Include="..\JsOSMaui\Resources\Fonts\*" Link="Resources\Fonts\%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Include="..\JsOSMaui\**\*.cs" Exclude="..\JsOSMaui\bin\**;..\JsOSMaui\obj\**;..\JsOSMaui\Platforms\**" Link="%(RecursiveDir)%(Filename)%(Extension)" />
+		<MauiXaml Include="..\JsOSMaui\**\*.xaml" Exclude="..\JsOSMaui\bin\**;..\JsOSMaui\obj\**" Link="%(RecursiveDir)%(FileName)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Core\**" />
+	  <EmbeddedResource Remove="Core\**" />
+	  <MauiCss Remove="Core\**" />
+	  <MauiXaml Remove="Core\**" />
+	  <None Remove="Core\**" />
+	  <Page Remove="Core\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Remove="Page1.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="LiteDB" Version="5.0.11" />
+		<PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
+		<PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.HttpsPolicy" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Routing" Version="2.2.2" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+		<PackageReference Include="Microsoft.ProjectReunion" Version="0.8.0" />
+		<PackageReference Include="Microsoft.ProjectReunion.Foundation" Version="0.8.0" />
+		<PackageReference Include="Microsoft.ProjectReunion.WinUI" Version="0.8.0" />
+		<PackageReference Include="Microsoft.ProjectReunion.InteractiveExperiences" Version="0.8.0" NoWarn="NU1701" />
+		<PackageReference Include="System.Diagnostics.PerformanceCounter" Version="5.0.1" />
+		<PackageReference Include="System.IO.FileSystem" Version="4.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PRIResource Remove="Core\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <_MauiCompileToAdd Remove="Core\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <_MauiXamlToRemove Remove="Core\**" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+</Project>

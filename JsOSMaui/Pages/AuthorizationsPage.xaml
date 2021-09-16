@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="JsOSMaui.Pages.AuthorizationsPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:JsOSMaui.Pages"
+             xmlns:context="clr-namespace:JsOSMaui.ViewModels"
+             xmlns:v="clr-namespace:JsOSMaui.Views"
+             xmlns:core="clr-namespace:JsOSMaui.Core"
+             xmlns:conv="clr-namespace:JsOSMaui.Core.Converters"
+             xmlns:models="clr-namespace:JsOSMaui.Models"
+             x:DataType="context:AuthorizationsViewModel"
+             core:ViewModelLocator.AutoWireViewModel="True"
+             x:Name="AuthPage"
+             BackgroundColor="White">
+    <!--<ContentPage.BindingContext>
+        <context:AuthorizationsViewModel/>
+    </ContentPage.BindingContext>-->
+    <ContentPage.Resources>
+        <conv:MultiValueConverter x:Key="MultiValueConverter"/>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <!-- EmptyView="No items to display" -->
+            <ListView 
+                x:Name="ListView"
+                Grid.Row="{OnIdiom Phone=0, Default=1}"
+                ItemsSource="{Binding AppPermission}"  
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:AppPermission">
+                        <ViewCell>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                    </Grid>
+                                    <Grid Grid.Column="0">
+                                        <FlexLayout>
+                                            <Switch x:Name="AppSelected" VerticalOptions="Center">
+                                                <Switch.Style>
+                                                    <Style TargetType="{x:Type Switch}">
+                                                        <Setter Property="OnColor" Value="Orange"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger TargetType="{x:Type Switch}" Binding="{Binding IsToggled, Source={x:Reference AppSelected}}" Value="True">
+                                                                <Setter Property="OnColor" Value="Green"/>
+                                                                <Setter Property="ThumbColor" Value="Green"/>
+                                                                <Setter Property="BackgroundColor" Value="Green"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Switch.Style>
+                                            </Switch>
+                                            <Label VerticalOptions="End" Text="{Binding AppName}" TextColor="Black" FontSize="20"/>
+                                        </FlexLayout>
+                                    </Grid>
+                                    <Button
+                                            Grid.Column="1"
+                                            HorizontalOptions="End"
+                                            VerticalOptions="Center"
+                                            x:Name="AllEnabled"  
+                                            Command="{Binding BindingContext.SelectChildPermission, Source={x:Reference AuthPage}}">
+                                        <Button.CommandParameter>
+                                            <MultiBinding  Converter="{StaticResource MultiValueConverter}">
+                                                <Binding Path="."/>
+                                                <Binding Path="." Source="{x:Reference AllEnabled}"/>
+                                            </MultiBinding>
+                                        </Button.CommandParameter>
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}">
+                                                <Setter Property="WidthRequest" Value="100"/>
+                                                <!--<Setter Property="BackgroundColor" Value="Red"/>
+                                                <Setter Property="Background" Value="Red"/>-->
+                                                <Setter Property="Text" Value="Enable"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger TargetType="{x:Type Button}" Binding="{Binding Enabled}" Value="True">
+                                                        <Setter Property="BackgroundColor" Value="Green"/>
+                                                        <Setter Property="Background" Value="Green"/>
+                                                        <Setter Property="Text" Value="Disable"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="{x:Type Button}" Binding="{Binding Enabled}" Value="{x:Null}">
+                                                        <Setter Property="BackgroundColor" Value="Orange"/>
+                                                        <Setter Property="Background" Value="Orange"/>
+                                                        <Setter Property="Text" Value="Fully Enable"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                </Grid>
+
+                                <Grid Grid.Row="1" VerticalOptions="Start" Margin="16,0,0,0">
+                                    <Grid.Style>
+                                        <Style TargetType="{x:Type Grid}">
+                                            <Setter Property="IsVisible" Value="False"/>
+                                            <Style.Triggers>
+                                                <DataTrigger TargetType="{x:Type Grid}" Binding="{Binding IsToggled, Source={x:Reference AppSelected}}" Value="True">
+                                                    <Setter Property="IsVisible" Value="True"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
+                                    <StackLayout>
+                                        <ListView x:Name="Needs" VerticalOptions="Start" ItemsSource="{Binding Needs}">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate x:DataType="models:Need">
+                                                    <ViewCell>
+                                                        <FlexLayout BackgroundColor="Gray">
+                                                            <CheckBox Margin="8,0,0,0" VerticalOptions="End" HorizontalOptions="Start" IsChecked="{Binding Enabled}" />
+                                                            <Label TextColor="Black" VerticalOptions="End" Margin="16,0,0,0" Text="{Binding Permission}"/>
+                                                        </FlexLayout>
+                                                    </ViewCell>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </StackLayout>
+                                </Grid>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <v:NavBarView
+                x:Name="NavBar"
+                Grid.Row="{OnIdiom Phone=1, Default=0}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

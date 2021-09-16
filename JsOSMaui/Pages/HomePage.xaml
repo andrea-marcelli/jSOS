@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="JsOSMaui.Pages.HomePage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:JsOSMaui.Pages"
+             xmlns:context="clr-namespace:JsOSMaui.ViewModels"
+             xmlns:core="clr-namespace:JsOSMaui.Core"
+             xmlns:v="clr-namespace:JsOSMaui.Views"
+             x:DataType="context:HomeViewModel"
+             x:Name="MainPage"
+             core:ViewModelLocator.AutoWireViewModel="True"
+             BackgroundColor="White">
+    <!--<ContentPage.BindingContext>
+        <context:HomeViewModel/>
+    </ContentPage.BindingContext>-->
+    <ContentPage.Content>
+		<StackLayout>
+			<Label Text="Welcome to .NET MAUI!!!"
+			       HorizontalOptions="CenterAndExpand"
+			       TextColor="Purple"
+			       VerticalOptions="CenterAndExpand"/>
+
+            <v:NavBarView
+                x:Name="NavBar"
+                Grid.Row="{OnIdiom Phone=1, Default=0}"/>
+        </StackLayout>
+	</ContentPage.Content>
+</ContentPage>
