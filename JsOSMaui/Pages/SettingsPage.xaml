@@ -12,10 +12,6 @@
     <!--<ContentPage.BindingContext>
         <context:SettingsViewModel/>
     </ContentPage.BindingContext>-->
-    <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="Menu1" Command="{Binding SaveSettings}" Order="Primary" Priority="0" />
-        <ToolbarItem x:Name="Menu2"  Order="Primary" Priority="1" />
-    </ContentPage.ToolbarItems>
     <ContentPage.Content>
 		<StackLayout>
             <Grid VerticalOptions="StartAndExpand" Grid.Row="{OnIdiom Phone=0, Default=1}">
@@ -25,16 +21,28 @@
                 </Grid.RowDefinitions>
                 <StackLayout>
                     <FlexLayout>
-                        <Label TextColor="Black" Text="Enabled"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
                         <CheckBox IsChecked="{Binding Settings.Enabled, Mode=TwoWay}" VerticalOptions="CenterAndExpand"/>
+                        <Label Grid.Column="1" TextColor="Black" Text="Enabled"/>
                     </FlexLayout>
                     <FlexLayout>
-                        <Label TextColor="Black" Text="Allow External Ip"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
                         <CheckBox IsChecked="{Binding Settings.AllowExternalIps, Mode=TwoWay}" VerticalOptions="CenterAndExpand"/>
+                        <Label Grid.Column="1" TextColor="Black" Text="Allow External Ip"/>
                     </FlexLayout>
                 </StackLayout>
-                <Button Grid.Row="1" Text="Save" Command="{Binding SaveSettings}" CommandParameter="{Binding Settings}" VerticalOptions="CenterAndExpand" WidthRequest="100" Margin="20,0"/>
             </Grid>
+            <Button Text="Save" Command="{Binding SaveSettings}" CommandParameter="{Binding Settings}" HorizontalOptions="End" WidthRequest="100"/>
             <v:NavBarView
                 x:Name="NavBar"
                 Grid.Row="{OnIdiom Phone=1, Default=0}"/>

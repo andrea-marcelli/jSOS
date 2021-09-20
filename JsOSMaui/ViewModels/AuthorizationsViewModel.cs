@@ -5,7 +5,6 @@ using Microsoft.Maui.Controls;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Drawing.Printing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
@@ -75,7 +74,10 @@ namespace JsOSMaui.ViewModels
             this.AppPermission.Clear();
             var apps = this.db.GetAppPermission().FindAll().ToList();
 
-            apps.Distinct().ToList().ForEach((x) => { this.AppPermission.Add(x); });
+            foreach(var app in apps)
+            {
+                this.AppPermission.Add(app);
+            }
 
             OnPropertyChanged(nameof(this.AppPermission));
             this.Settings = this.db.GetSettings();
@@ -102,7 +104,7 @@ namespace JsOSMaui.ViewModels
         private void OnSelectChildPermission(List<object> args)
         {
             AppPermission app = args[0] as AppPermission;
-            AppPermission binded = AppPermission.Where(x => x.AppName == app.AppName).FirstOrDefault();
+            AppPermission binded = AppPermission.FirstOrDefault(x => x.AppName == app.AppName);
 
             var enabled = (app.Enabled.HasValue == false || app.Enabled.Value == false);
 
@@ -110,13 +112,6 @@ namespace JsOSMaui.ViewModels
             {
                 item.Enabled = enabled;
             }
-        }
-
-        private void OnSelectChildPermissionItem(List<object> args)
-        {
-            AppPermission app = args[0] as AppPermission;
-            bool? selection = (bool?)args[1];
-            AppPermission binded = AppPermission.Where(x => x.AppName == app.AppName).FirstOrDefault();
         }
 
         #region INotifyPropertyChanged

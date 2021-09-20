@@ -21,6 +21,12 @@
     <ContentPage.Content>
         <StackLayout>
             <!-- EmptyView="No items to display" -->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+            </Grid>
             <ListView 
                 x:Name="ListView"
                 Grid.Row="{OnIdiom Phone=0, Default=1}"
@@ -127,6 +133,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Button Text="Save" HorizontalOptions="End" Command="{Binding BindingContext.SavePermission, Source={x:Reference AuthPage}}"/>
             <v:NavBarView
                 x:Name="NavBar"
                 Grid.Row="{OnIdiom Phone=1, Default=0}"/>

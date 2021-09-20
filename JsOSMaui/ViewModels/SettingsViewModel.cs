@@ -31,6 +31,9 @@ namespace JsOSMaui.ViewModels
 
             // Commands
             SaveSettings = new Command<Settings>(OnSaveSettings);
+
+            // First load
+            this.Settings = this.db.GetSettings();
         }
 
         private void OnSaveSettings(Settings o)
