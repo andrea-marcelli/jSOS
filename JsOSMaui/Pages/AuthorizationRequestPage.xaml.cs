@@ -12,7 +12,7 @@ using JsOSMaui.ViewModels;
 namespace JsOSMaui.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AuthorizationRequestPage : ContentPage, IPage
+    public partial class AuthorizationRequestPage : ContentPage, IView
     {
         public AuthorizationRequestPage(AppPermission appPermission) : base()
         {

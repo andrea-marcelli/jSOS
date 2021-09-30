@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace JsOSMaui.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AuthorizationsPage : ContentPage, IPage
+    public partial class AuthorizationsPage : ContentPage, IView
     {
         public AuthorizationsPage()
         {

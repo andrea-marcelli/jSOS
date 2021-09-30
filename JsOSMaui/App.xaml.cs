@@ -1,8 +1,11 @@
-﻿using JsOSMaui.Pages;
-using Application = Microsoft.Maui.Controls.Application;
+﻿using JsOSMaui.Models;
+using JsOSMaui.Pages;
 using JsOSMaui.Services.Shared;
-using JsOSMaui.Models;
 using JsOSMaui.Services.Shared.Interfaces;
+using Microsoft.Maui;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.PlatformConfiguration.WindowsSpecific;
+using Application = Microsoft.Maui.Controls.Application;
 
 namespace JsOSMaui
 {
@@ -19,7 +22,7 @@ namespace JsOSMaui
 			navigationService.Configure("AuthPage", typeof(AuthorizationsPage));
             navigationService.Configure("AuthRequest", typeof(AuthorizationRequestPage));
 
-			var mainPage = ((ViewNavigationService)navigationService).SetRootPage("MainPage");
+			var mainPage = ((ViewNavigationService)navigationService).SetRootPage("AuthPage");
 
 			// Either set "MainPage" or override "CreateWindow"
 			MainPage = mainPage;

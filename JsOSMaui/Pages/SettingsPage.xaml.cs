@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace JsOSMaui.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SettingsPage : ContentPage, IPage
+    public partial class SettingsPage : ContentPage, IView
     {
         public SettingsPage()
         {
